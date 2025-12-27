@@ -31,21 +31,15 @@ defineEmits<{
 
 /** 励志语录数据库 */
 const quotes = [
-  { text: "成功不是终点，失败也不是终结，唯有勇气才是永恒。", author: "温斯顿·丘吉尔", category: "励志" },
-  { text: "代码如诗，每一行都是对完美的追求。", author: "极客箴言", category: "技术" },
-  { text: "今天的努力，是为了明天更好的自己。", author: "佚名", category: "励志" },
-  { text: "优秀的程序员不是写代码最多的，而是删代码最多的。", author: "编程智慧", category: "技术" },
-  { text: "保持简单，保持优雅，保持高效。", author: "设计哲学", category: "技术" },
   { text: "每一次调试，都是与bug的一场较量。", author: "程序员日常", category: "幽默" },
-  { text: "不要害怕重构，害怕的应该是技术债。", author: "代码整洁之道", category: "技术" },
-  { text: "真正的智慧不在于知道所有答案，而在于提出正确的问题。", author: "苏格拉底", category: "励志" },
-  { text: "让代码自己说话，注释只是辅助。", author: "Clean Code", category: "技术" },
   { text: "bug不会因为你忽视它而消失，只会在生产环境中惊艳亮相。", author: "墨菲定律", category: "幽默" },
-  { text: "持续学习，永不止步。今天比昨天更强大。", author: "成长心态", category: "励志" },
-  { text: "好的架构不是设计出来的，而是演化出来的。", author: "架构之道", category: "技术" },
   { text: "测试不是负担，而是对代码的信心保障。", author: "TDD实践", category: "技术" },
+  { text: "不要害怕重构，害怕的应该是技术债。", author: "代码整洁之道", category: "技术" },
+  { text: "好的架构不是设计出来的，而是演化出来的。", author: "架构之道", category: "技术" },
+  { text: "优秀的程序员不是写代码最多的，而是删代码最多的。", author: "编程智慧", category: "技术" },
+  { text: "让代码自己说话，注释只是辅助。", author: "Clean Code", category: "技术" },
+  { text: "代码如诗，每一行都是对完美的追求。", author: "极客", category: "技术" },
   { text: "编程不仅是科学，更是艺术。", author: "Donald Knuth", category: "技术" },
-  { text: "越简单的方案，越容易维护。", author: "KISS原则", category: "技术" }
 ];
 
 const currentQuote = ref(quotes[0]);
@@ -191,7 +185,7 @@ onMounted(() => {
               </div>
             </div>
             <p class="text-xs text-gray-500 dark:text-indigo-200 mt-2">
-              {{ subscriptions.length === 0 ? '暂无订阅，请添加' : `系统中有 ${subscriptions.length - activeSubscriptions}
+              {{ subscriptions.length === 0 ? '暂无订阅' : `系统中有 ${subscriptions.length - activeSubscriptions}
               个订阅处于停用状态` }}
             </p>
           </div>
