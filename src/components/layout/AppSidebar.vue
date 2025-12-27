@@ -310,8 +310,8 @@ onUnmounted(() => {
         <!-- Logo 文字（折叠时隐藏） -->
         <transition name="fade">
           <div v-if="!isCollapsed" class="logo-text">
-            <h1 class="logo-title gradient-text-animated">Sub-One</h1>
-            <p class="logo-subtitle">Manager</p>
+            <h1 class="logo-title gradient-text-animated">管理员</h1>
+            <p class="logo-subtitle">ADMIN</p>
           </div>
         </transition>
       </div>
