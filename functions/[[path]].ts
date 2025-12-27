@@ -815,9 +815,12 @@ async function generateCombinedNodeList(
     const processedSubResults = await Promise.all(subPromises);
     const allNodes = [...processedManualNodes, ...processedSubResults.flat()];
 
+// --- 去重节点函数 ---
+function deduplicateNodes(allNodes: Node[]): Node[] {
     // 4. 去重 (基于 URL)
     const uniqueNodes: Node[] = [];
     const seenUrls = new Set<string>();
+
     for (const node of allNodes) {
         if (!node || !node.url) continue;
         if (!seenUrls.has(node.url)) {
@@ -826,8 +829,12 @@ async function generateCombinedNodeList(
         }
     }
 
+    // 返回去重后的节点数组，由上层决定如何序列化
     return uniqueNodes;
 }
+
+// --- [核心修改] 订阅处理函数 ---
+// 这里你的订阅处理逻辑可以继续写在下面
 
     // 4. 返回节点对象数组，由上层决定如何序列化
     return uniqueNodes;
