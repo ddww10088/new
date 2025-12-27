@@ -19,12 +19,12 @@ const isSaving = ref(false);
 
 // 默认设置值
 const defaultSettings: AppConfig = {
-  FileName: 'Sub-One',
-  subConverter: 'url.v1.mk',
-  subConfig: 'https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/config/ACL4SSR_Online_Full.ini',
+  FileName: 'VIP',
+  subConverter: 'cloud.com',
+  subConfig: 'cloud.com',
   prependSubName: true,
   mytoken: 'auto',
-  profileToken: '', // 默认为空，用户需主动设置
+  profileToken: '', // 默认为空，需主动设置
   BotToken: '',
   ChatID: ''
 };
@@ -111,35 +111,15 @@ watch(() => props.show, (newValue) => {
 
 // 预设的后端地址选项
 const converterPresets = [
-  { label: 'api.v1.mk (推荐)', value: 'api.v1.mk' },
-  { label: 'url.v1.mk', value: 'url.v1.mk' },
-  { label: 'sub.xeton.dev', value: 'sub.xeton.dev' },
-  { label: 'api.dler.io', value: 'api.dler.io' },
-  { label: 'sub.id9.cc', value: 'sub.id9.cc' },
+  { label: '默认后端', value: 'bisokjortfrp.ap-northeast-1.clawcloudrun.com' },
   { label: '自定义', value: '' }
 ];
 
 // 预设的配置文件选项
 const configPresets = [
   {
-    label: 'ACL4SSR 在线完整版 (推荐)',
-    value: 'https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/config/ACL4SSR_Online_Full.ini'
-  },
-  {
-    label: 'ACL4SSR 精简版',
-    value: 'https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini'
-  },
-  {
-    label: 'ACL4SSR 去广告版',
-    value: 'https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini'
-  },
-  {
-    label: 'ACL4SSR 无测速版',
-    value: 'https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini'
-  },
-  {
-    label: 'ACL4SSR 极简版',
-    value: 'https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini'
+    label: '默认配置',
+    value: 'https://raw.githubusercontent.com/VIP4001177/clash/refs/heads/main/clash.ini'
   },
   { label: '自定义', value: '' }
 ];
@@ -212,14 +192,14 @@ const configPresets = [
               <label for="profileToken"
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">订阅组分享Token</label>
               <input type="text" id="profileToken" v-model="settings.profileToken" class="input-modern-enhanced w-full"
-                placeholder="例如：my（必须与订阅Token不同）">
+                placeholder="例如 admin">
               <p class="text-xs text-amber-600 dark:text-amber-400 mt-2 flex items-start gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mt-0.5 flex-shrink-0" fill="none"
                   viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-1.964-1.333-2.732 0L3.732 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
-                <span>重要：此Token必须与"自定义订阅Token"不同，否则会导致访问冲突。留空则无法使用订阅组分享功能。</span>
+                <span>此Token必须与"自定义订阅Token"不同</span>
               </p>
             </div>
             <div>
@@ -277,7 +257,7 @@ const configPresets = [
 
               <!-- 输入框 -->
               <input type="text" id="subConverter" v-model="settings.subConverter" class="input-modern-enhanced w-full"
-                placeholder="例如：api.v1.mk">
+                placeholder="例如：cloud.com">
             </div>
 
             <!-- 配置文件URL -->
@@ -326,7 +306,7 @@ const configPresets = [
                 class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Bot
                 Token</label>
               <input type="text" id="tgBotToken" v-model="settings.BotToken" class="input-modern-enhanced w-full"
-                placeholder="从 @BotFather 获取的Bot Token">
+                placeholder="从 @BotFather 获取">
             </div>
             <div class="group">
               <label for="tgChatID"
