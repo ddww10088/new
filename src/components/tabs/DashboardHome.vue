@@ -98,7 +98,7 @@ onMounted(() => {
             </div>
             <div>
               <h3 class="text-gray-800 dark:text-white font-bold text-base">每日一言</h3>
-              <p class="text-gray-500 dark:text-gray-400 text-xs">Daily Inspiration</p>
+              <p class="text-gray-500 dark:text-gray-400 text-xs">Hello world</p>
             </div>
           </div>
 
