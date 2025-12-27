@@ -306,13 +306,9 @@
             联系支持
           </h4>
           <div class="bg-gray-50/60 dark:bg-gray-800/75 rounded-xl p-4">
-            <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-              如果您在使用过程中遇到问题，可以：
-            </p>
             <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
-              <li>• 查看项目文档和README</li>
-              <li>• 提交Issue到GitHub仓库</li>
-              <li>• 重新启动操作引导</li>
+              <li>• 客服电报 VIP111177</li>
+              <li>• 客服微信 VIP4001177</li>
             </ul>
           </div>
         </section>
