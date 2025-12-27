@@ -119,7 +119,7 @@ const navigationItems = computed<NavigationItem[]>(() => [
   },
   {
     id: 'profiles',
-    label: '云端数据',
+    label: '订阅组',
     icon: 'profile',
     count: props.profilesCount,
     gradient: 'from-purple-500 to-pink-600',
@@ -128,7 +128,7 @@ const navigationItems = computed<NavigationItem[]>(() => [
   },
   {
     id: 'generator',
-    label: '订阅分组',
+    label: '链接生成',
     icon: 'link',
     count: props.generatorCount,
     gradient: 'from-cyan-500 to-blue-600',
