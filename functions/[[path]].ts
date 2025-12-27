@@ -847,7 +847,9 @@ async function handleSubRequest(context: EventContext<Env, any, any>) {
     let effectiveSubConfig;
     let isProfileExpired = false; // Moved declaration here
 
-    const DEFAULT_EXPIRED_NODE = `trojan://00000000-0000-0000-0000-000000000000@127.0.0.1:443#${encodeURIComponent('您的订阅已失效')}`;
+    const DEFAULT_EXPIRED_NODE = `ss://YWVzLTI1Ni1nY206MDAwMDAwMDAwMDAwMDAwMA==@127.0.0.1:443#🇨🇳 订阅会员已到期
+ss://YWVzLTI1Ni1nY206MDAwMDAwMDAwMDAwMDAwMA==@127.0.0.1:443#🇨🇳 请联系客服续费
+ss://YWVzLTI1Ni1nY206MDAwMDAwMDAwMDAwMDAwMA==@127.0.0.1:443#🇨🇳 微信 VIP4001177`;
 
     if (profileIdentifier) {
 
