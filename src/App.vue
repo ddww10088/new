@@ -214,7 +214,7 @@ const tabInfo = computed(() => {
     },
     subscriptions: {
       title: '订阅管理',
-      description: '管理您的所有机场订阅链接',
+      description: '云端数据',
       icon: 'subscription'
     },
     profiles: {
@@ -224,12 +224,12 @@ const tabInfo = computed(() => {
     },
     generator: {
       title: '链接生成',
-      description: '生成适用于不同客户端的订阅链接',
+      description: '生成适用于不同客户端的订阅',
       icon: 'link'
     },
     nodes: {
       title: '手动节点',
-      description: '添加和管理单个节点链接',
+      description: '添加和管理单个节点',
       icon: 'node'
     }
   };
