@@ -752,22 +752,12 @@ async function handleApiRequest(request: Request, env: Env) {
 
 // 移除此行，已移动到顶部
 
-// ==========================
-// 替换原 generateCombinedNodeList 函数
-// ==========================
-async function generateCombinedNodeList(
-    context: any,
-    config: any,
-    userAgent: string,
-    subs: any[],
-    prependedContent = ''
-) {
+async function generateCombinedNodeList(context, config, userAgent, subs, prependedContent = '') {
     // 1. 处理手动节点
     const manualNodes = subs.filter(sub => !sub.url.toLowerCase().startsWith('http'));
-    const parsedManualNodes = subscriptionParser.parseNodeLines(
-        manualNodes.map(n => n.url),
-        '手动节点'
-    );
+    // 解析手动节点
+    const parsedManualNodes = subscriptionParser.parseNodeLines(manualNodes.map(n => n.url), '手动节点');
+
     const processedManualNodes = subscriptionParser.processNodes(
         parsedManualNodes,
         '手动节点',
@@ -782,7 +772,7 @@ async function generateCombinedNodeList(
                 fetch(new Request(sub.url, {
                     headers: { 'User-Agent': userAgent },
                     redirect: "follow",
-                    cf: { insecureSkipVerify: true } // 核心修改：跳过证书验证
+                    cf: { insecureSkipVerify: true }
                 })),
                 new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 10000))
             ]) as Response;
@@ -791,19 +781,9 @@ async function generateCombinedNodeList(
             const text = await response.text();
 
             // parse 方法内部会调用 processNodes
-            const nodes = subscriptionParser.parse(text, sub.name, {
+            return subscriptionParser.parse(text, sub.name, {
                 exclude: sub.exclude,
                 prependSubName: config.prependSubName
-            });
-
-            // 核心修改：对 VLESS / Trojan 节点自动添加 skip-cert-verify
-            return nodes.map(n => {
-                if (!n.url) return n;
-                const url = n.url.trim();
-                if (url.startsWith('vless://') || url.startsWith('trojan://')) {
-                    n.url = url.includes('?') ? `${url}&skip-cert-verify=true` : `${url}?skip-cert-verify=true`;
-                }
-                return n;
             });
         } catch (e) {
             console.error(`Failed to fetch/parse sub ${sub.name}:`, e);
@@ -811,15 +791,12 @@ async function generateCombinedNodeList(
         }
     });
 
-    // 3. 等待所有 HTTP 订阅解析完成
     const processedSubResults = await Promise.all(subPromises);
     const allNodes = [...processedManualNodes, ...processedSubResults.flat()];
 
-// --- 去重节点函数 ---
-function deduplicateNodes(allNodes: Node[]): Node[] {
-    // 4. 去重 (基于 URL)
+    // 3. 去重 (基于 URL)
     const uniqueNodes: Node[] = [];
-    const seenUrls = new Set<string>();
+    const seenUrls = new Set();
 
     for (const node of allNodes) {
         if (!node || !node.url) continue;
@@ -828,13 +805,6 @@ function deduplicateNodes(allNodes: Node[]): Node[] {
             uniqueNodes.push(node);
         }
     }
-
-    // 返回去重后的节点数组，由上层决定如何序列化
-    return uniqueNodes;
-}
-
-// --- [核心修改] 订阅处理函数 ---
-// 这里你的订阅处理逻辑可以继续写在下面
 
     // 4. 返回节点对象数组，由上层决定如何序列化
     return uniqueNodes;
@@ -877,9 +847,7 @@ async function handleSubRequest(context: EventContext<Env, any, any>) {
     let effectiveSubConfig;
     let isProfileExpired = false; // Moved declaration here
 
-    const DEFAULT_EXPIRED_NODE = `ss://YWVzLTI1Ni1nY206MDAwMDAwMDAwMDAwMDAwMA==@127.0.0.1:443#🇨🇳 订阅会员已到期
-ss://YWVzLTI1Ni1nY206MDAwMDAwMDAwMDAwMDAwMA==@127.0.0.1:443#🇨🇳 请联系客服续费
-ss://YWVzLTI1Ni1nY206MDAwMDAwMDAwMDAwMDAwMA==@127.0.0.1:443#🇨🇳 微信 VIP4001177`;
+    const DEFAULT_EXPIRED_NODE = `trojan://00000000-0000-0000-0000-000000000000@127.0.0.1:443#${encodeURIComponent('您的订阅已失效')}`;
 
     if (profileIdentifier) {
 
