@@ -53,22 +53,22 @@ const currentYear = computed(() => new Date().getFullYear());
       <!-- ==================== 版权信息 ==================== -->
       <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">
         <!-- 版权年份 - 自动更新 -->
-        Copyright © {{ currentYear }}
+        VIP © {{ currentYear }}
         
         <!-- 项目名称链接 - 指向 GitHub -->
         <a 
-          href="https://github.com/binbankm/Sub-One" 
+          href="https://www.gov.mo/zh-hant" 
           target="_blank"
           class="font-bold gradient-text hover:opacity-80 transition-opacity duration-300"
         >
-          Sub-One Manager
+          澳门银河工作室
         </a>
         
         <!-- 分隔符 -->
         <span class="mx-2">·</span>
         
         <!-- 版权声明 -->
-        <span class="text-xs">All Rights Reserved</span>
+        <span class="text-xs">777</span>
       </p>
 
       <!-- ==================== 特色标签 ==================== -->
