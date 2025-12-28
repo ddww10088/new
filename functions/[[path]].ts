@@ -1106,37 +1106,6 @@ async function getCallbackToken(env) {
 }
 
 
-    /* ===== 最小侵入补丁：开始 ===== */
-    let finalBody = responseText;
-
-    // 仅在 Clash 格式下，且 YAML 可解析时注入
-    if (targetFormat === 'clash') {
-        try {
-            const cfg = yaml.load(responseText);
-
-            if (cfg && Array.isArray(cfg.proxies)) {
-                for (const p of cfg.proxies) {
-                    if (
-                        p.type === 'vless' &&
-                        (
-                            p.flow === 'xtls-rprx-vision' ||
-                            p.flow === 'xtls-rprx-vision-udp443' ||
-                            p.tls === true
-                        )
-                    ) {
-                        p['skip-cert-verify'] = true;
-                    }
-                }
-                finalBody = yaml.dump(cfg, { lineWidth: -1 });
-            }
-        } catch (_) {
-            // 解析失败直接回退，保持原行为
-            finalBody = responseText;
-        }
-    }
-    /* ===== 最小侵入补丁：结束 ===== */
-
-
 // --- [核心修改] Cloudflare Pages Functions 主入口 ---
 export async function onRequest(context: EventContext<Env, any, any>) {
     const { request, env, next } = context;
